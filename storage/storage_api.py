@@ -13,7 +13,9 @@ def api_home():
 
 @storage_api.route('/newuser/', methods=['POST'],strict_slashes=False)
 def new_container():
-    container_name = request.args['name']
+
+    container_name = request.args.get('name', 'not set')
+    container_name = Markup.escape(container_name)
     response = create_container(container_name)
     return response
 
